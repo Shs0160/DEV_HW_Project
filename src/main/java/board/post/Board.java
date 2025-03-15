@@ -15,7 +15,7 @@ public class Board {
 
     public void writePost(String title, String content) {
         post.add(new Post(postId, title, content));
-        System.out.println("게시글이 작성이 완료되었습니다!");
+        System.out.println("게시물이 작성이 완료되었습니다!");
     }
 
     public void readPost(int postId) {
@@ -23,8 +23,10 @@ public class Board {
             if(post.id == postId){
                 System.out.println("제목: " + post.title);
                 System.out.println("내용: " + post.content);
+                return;
             }
         }
+        System.out.println("게시물이 존재하지 않습니다.");
     }
 
 }
