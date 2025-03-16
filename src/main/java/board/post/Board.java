@@ -13,11 +13,13 @@ public class Board {
     private ArrayList<Post> post = new ArrayList<>();
     private int postId = 1;
 
+    //작성
     public void writePost(String title, String content) {
         post.add(new Post(postId, title, content));
         System.out.println("게시물이 작성이 완료되었습니다!");
     }
 
+    //조회
     public void readPost(int postId) {
         for(Post post : post) {
             if(post.id == postId){
@@ -28,5 +30,26 @@ public class Board {
         }
         System.out.println("게시물이 존재하지 않습니다.");
     }
+
+    //수정
+    public void listPost() {
+        if(post.isEmpty()) {
+            System.out.println("게시물이 존재하지 않습니다.");
+        }
+        System.out.println("총 게시글은 " + postId + "개 작성되었습니다.");
+        for(Post post : post) {
+            System.out.println(post.id + "번 게시글");
+            System.out.println("제목: " + post.title);
+            System.out.println("내용: " + post.content);
+        }
+    }
+
+    //삭제
+
+    public void deletePost(int postId) {
+
+    }
+
+
 
 }
