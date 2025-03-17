@@ -1,6 +1,8 @@
 package board.post;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 public class Board {
 
@@ -18,7 +20,7 @@ public class Board {
     //작성
     public void writePost(String title, String content) {
         post.add(new Post(postId, title, content));
-        System.out.println("게시물이 작성이 완료되었습니다!");
+        System.out.println("게시글이 작성이 성공적으로 완료되었습니다!");
     }
 
     //조회
@@ -48,17 +50,22 @@ public class Board {
     }
 
     //삭제
-
+    //그냥 remove를 사용하니까 ConcurrentModificationException에러가 발생함 -> 초면
+    /*ConcurrentModificationException -> Arraylist에서 반복문을 도는
+    도중에 크기 변경이 일어나면 발생되는 에러
+    -> Iterator를 사용하면 됨
+     */
     public void deletePost(int postId) {
-        if(post.isEmpty()) {
-            System.out.println("게시글이 비어있어 삭제가 불가능 합니다.");
-        }
-        for(Post posts : post) {
-            if(posts.id == postId) {
-                post.remove(posts);
-                System.out.println(posts.id + "번 게시물이 성공적으로 삭제되었습니다!");
+        Iterator<Post> iterator = post.iterator();
+        while (iterator.hasNext()) {
+            Post post = iterator.next();
+            if (post.getId() == postId) {
+                iterator.remove(); //
+                System.out.println(postId + "번 게시물이 성공적으로 삭제되었습니다!");
+                return;
             }
         }
+        System.out.println(postId + "번 게시글을 찾을 수 없습니다.");
     }
 
     //수정
@@ -67,7 +74,7 @@ public class Board {
             if(posts.id == postId) {
                 posts.title = title;
                 posts.content = content;
-                System.out.println(postId + "번 게시글이 수정되었습니다.");
+                System.out.println(postId + "번 게시글이 성공적으로 수정되었습니다!");
                 return;
             }
         }

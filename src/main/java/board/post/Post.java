@@ -11,4 +11,9 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }
