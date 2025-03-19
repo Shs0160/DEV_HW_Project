@@ -21,6 +21,7 @@ public class Board {
     public void writePost(String title, String content) {
         post.add(new Post(postId, title, content));
         System.out.println("게시글이 작성이 성공적으로 완료되었습니다!");
+        postId++;
     }
 
     //조회
